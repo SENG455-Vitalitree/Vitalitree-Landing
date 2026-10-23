@@ -1,0 +1,2065 @@
+<!doctype html>
+<!--
+  Vitalitree — public product landing page (VDEV-023)
+
+  Static, dependency-free page: drop this folder on Netlify, Vercel, or
+  GitHub Pages as-is. Design tokens mirror the POC style guide
+  (Vitalitree-POC/Style Guide.pdf + tailwind.config.js).
+
+  Anything marked with a red * (class="ph") is a placeholder waiting on
+  real content — mostly from VBIZ-014 (brand assets + value prop copy)
+  and VDEV-024 (live demo URL). See landing/README.md for the full list.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vitalitree — Your family's health records, together</title>
+    <meta
+      name="description"
+      content="Vitalitree keeps your whole family's health records in one simple, shared, private place. Snap a photo of any medical document, prep for visits together, and stay on the same page."
+    />
+    <meta name="theme-color" content="#0F4C5C" />
+    <meta property="og:title" content="Vitalitree — Your family's health records, together" />
+    <meta
+      property="og:description"
+      content="One simple, shared, private health record for families caring for an aging parent."
+    />
+    <!-- TODO(VBIZ-014): og:image + favicon once final brand assets exist -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230F4C5C'/%3E%3Cpath d='M16 5l-6 8h3l-5 7h4l-4 6h16l-4-6h4l-5-7h3z' fill='%23fff'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ---------- Tokens (from POC style guide) ---------- */
+      :root {
+        --teal: #0f4c5c;
+        --teal-pressed: #0a3640;
+        --background: #eef3f6;
+        --surface: #ffffff;
+        --tint: #e3eef2;
+        --text: #14232b;
+        --text-soft: #4a5b64;
+        --border: #b9c7ce;
+        --danger: #b3261e;
+        --success: #1f6b3d;
+
+        --radius-chip: 12px;
+        --radius: 16px;
+        --radius-lg: 28px;
+
+        --space-1: 8px;
+        --space-2: 16px;
+        --space-3: 24px;
+        --space-4: 32px;
+
+        --max: 1160px;
+        --shadow: 0 1px 2px rgba(20, 35, 43, 0.06), 0 8px 24px rgba(20, 35, 43, 0.06);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        * {
+          transition: none !important;
+        }
+      }
+      body {
+        margin: 0;
+        background: var(--background);
+        color: var(--text);
+        font-family: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        font-size: 18px; /* Body 18 */
+        line-height: 1.55;
+        overflow-x: hidden;
+      }
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      a {
+        color: inherit;
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+      h1,
+      h2,
+      h3 {
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+      }
+      :focus-visible {
+        outline: 3px solid var(--teal);
+        outline-offset: 3px;
+        border-radius: 8px;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+      .skip {
+        position: absolute;
+        left: -9999px;
+        top: 8px;
+        background: var(--surface);
+        padding: 12px 16px;
+        border-radius: var(--radius-chip);
+        z-index: 100;
+      }
+      .skip:focus {
+        left: 16px;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+      @media (min-width: 720px) {
+        .wrap {
+          padding: 0 32px;
+        }
+      }
+      section {
+        padding: 72px 0;
+        scroll-margin-top: 48px;
+      }
+      @media (min-width: 900px) {
+        section {
+          padding: 104px 0;
+        }
+      }
+
+      .eyebrow {
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin-bottom: var(--space-2);
+      }
+      .section-head {
+        max-width: 720px;
+        margin-bottom: 48px;
+      }
+      .section-head.center {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+      .section-head h2 {
+        font-size: clamp(30px, 4.2vw, 44px);
+      }
+      .section-head p {
+        margin-top: var(--space-2);
+        color: var(--text-soft);
+        font-size: 20px;
+      }
+
+      /* Placeholder marker — anything awaiting real content */
+      .ph {
+        color: var(--danger);
+        font-weight: 700;
+        margin-left: 2px;
+        cursor: help;
+        text-decoration: none;
+      }
+      .ph-box {
+        border: 2px dashed var(--danger);
+        border-radius: var(--radius);
+        color: var(--danger);
+        background: #fff6f5;
+        padding: var(--space-2);
+        font-size: 16px;
+      }
+
+      /* ---------- Buttons (Button / Primary + Secondary) ---------- */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 56px;
+        padding: 14px 26px;
+        border-radius: var(--radius);
+        font: inherit;
+        font-weight: 700;
+        font-size: 18px;
+        text-decoration: none;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition:
+          background-color 0.15s,
+          transform 0.15s;
+      }
+      .btn svg {
+        width: 22px;
+        height: 22px;
+      }
+      .btn-primary {
+        background: var(--teal);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--teal-pressed);
+      }
+      .btn-primary:active {
+        transform: translateY(1px);
+      }
+      .btn-secondary {
+        background: var(--surface);
+        color: var(--teal);
+        border-color: var(--teal);
+      }
+      .btn-secondary:hover {
+        background: var(--tint);
+      }
+      .btn-light {
+        background: #fff;
+        color: var(--teal);
+      }
+      .btn-light:hover {
+        background: var(--tint);
+      }
+      .btn-ghost-light {
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.6);
+      }
+      .btn-ghost-light:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* ---------- Nav ---------- */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(238, 243, 246, 0.88);
+        backdrop-filter: saturate(140%) blur(10px);
+        -webkit-backdrop-filter: saturate(140%) blur(10px);
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+      }
+      .nav.scrolled {
+        border-bottom-color: var(--border);
+      }
+      .nav .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-2);
+        min-height: 72px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 22px;
+        color: var(--teal);
+      }
+      .brand-mark {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: var(--teal);
+        display: grid;
+        place-items: center;
+        flex: none;
+      }
+      .brand-mark svg {
+        width: 22px;
+        height: 22px;
+      }
+      .nav-links {
+        display: none;
+        gap: var(--space-3);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-soft);
+        font-weight: 700;
+        font-size: 16px;
+        padding: 12px 4px;
+      }
+      .nav-links a:hover {
+        color: var(--teal);
+      }
+      @media (min-width: 900px) {
+        .nav-links {
+          display: flex;
+        }
+      }
+      .nav .btn {
+        min-height: 48px;
+        padding: 10px 18px;
+        font-size: 16px;
+        white-space: nowrap;
+      }
+      /* Small phones: the hero CTA + sticky bottom CTA cover it */
+      @media (max-width: 420px) {
+        .nav .btn {
+          display: none;
+        }
+      }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        padding-top: 48px;
+        padding-bottom: 72px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        inset: -20% -10% auto auto;
+        width: 720px;
+        height: 720px;
+        background: radial-gradient(closest-side, rgba(15, 76, 92, 0.12), transparent);
+        pointer-events: none;
+      }
+      .hero-grid {
+        display: grid;
+        gap: 56px;
+        align-items: center;
+        position: relative;
+      }
+      @media (min-width: 960px) {
+        .hero {
+          padding-top: 72px;
+          padding-bottom: 104px;
+        }
+        .hero-grid {
+          grid-template-columns: 1.05fr 0.95fr;
+        }
+      }
+      .hero h1 {
+        font-size: clamp(40px, 6vw, 64px);
+        letter-spacing: -0.02em;
+      }
+      .hero h1 em {
+        font-style: normal;
+        color: var(--teal);
+      }
+      .hero .lede {
+        margin-top: var(--space-3);
+        font-size: clamp(20px, 2vw, 22px);
+        color: var(--text-soft);
+        max-width: 560px;
+      }
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: var(--space-4);
+      }
+      @media (max-width: 480px) {
+        .cta-row .btn {
+          width: 100%;
+        }
+      }
+      .trust-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+        margin-top: var(--space-4);
+        padding: 0;
+        list-style: none;
+        color: var(--text-soft);
+        font-size: 16px;
+      }
+      .trust-row li {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .trust-row svg {
+        width: 18px;
+        height: 18px;
+        color: var(--success);
+      }
+
+      /* ---------- Phone mockups (rebuilt from POC screens) ---------- */
+      .phone-stage {
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }
+      .phone {
+        width: 100%;
+        max-width: 340px;
+        background: #0e1a20;
+        border-radius: 46px;
+        padding: 12px;
+        box-shadow:
+          0 30px 60px -20px rgba(15, 76, 92, 0.45),
+          0 12px 24px -12px rgba(20, 35, 43, 0.35);
+        position: relative;
+      }
+      .phone::before {
+        content: '';
+        position: absolute;
+        top: 22px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 96px;
+        height: 26px;
+        background: #0e1a20;
+        border-radius: 20px;
+        z-index: 3;
+      }
+      .screen {
+        background: var(--background);
+        border-radius: 36px;
+        overflow: hidden;
+        height: 640px;
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+      .status {
+        display: flex;
+        justify-content: space-between;
+        padding: 16px 26px 6px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .app-head {
+        padding: 18px 18px 10px;
+      }
+      .app-head .t {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      .app-head .s {
+        color: var(--text-soft);
+        font-size: 13px;
+      }
+      .app-body {
+        flex: 1;
+        padding: 0 14px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow: hidden;
+      }
+      .m-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 12px;
+      }
+      .m-card.focus {
+        border: 2px solid var(--teal);
+      }
+      .m-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .m-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        background: var(--tint);
+        color: var(--teal);
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        font-size: 16px;
+        flex: none;
+      }
+      .m-avatar.sm {
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+        background: var(--background);
+        color: var(--text);
+      }
+      .m-name {
+        font-weight: 700;
+        font-size: 15px;
+      }
+      .m-meta {
+        color: var(--text-soft);
+        font-size: 12px;
+      }
+      .m-chip {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        color: var(--text-soft);
+      }
+      .m-chip.tint {
+        background: var(--tint);
+        border-color: var(--tint);
+        color: var(--teal);
+      }
+      .m-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--teal);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .m-label svg,
+      .m-ico {
+        width: 15px;
+        height: 15px;
+        color: var(--teal);
+        flex: none;
+      }
+      .m-sub {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-soft);
+        padding: 4px 4px 0;
+      }
+      .m-btn {
+        background: var(--teal);
+        color: #fff;
+        border-radius: 14px;
+        font-weight: 700;
+        text-align: center;
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .m-btn.outline {
+        background: var(--surface);
+        color: var(--teal);
+        border: 2px solid var(--teal);
+      }
+      .m-btn svg {
+        width: 18px;
+        height: 18px;
+      }
+      .tabbar {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 6px 18px;
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        font-size: 10px;
+        color: var(--text-soft);
+        font-weight: 700;
+      }
+      .tabbar span {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+      }
+      .tabbar svg {
+        width: 20px;
+        height: 20px;
+      }
+      .tabbar .on {
+        color: var(--teal);
+      }
+
+      /* Senior ("Grandma mode") screen — large type, mirrors SeniorAppointmentCard */
+      .senior {
+        font-size: 17px;
+      }
+      .senior .app-head .t {
+        font-size: 28px;
+      }
+      .senior .m-card {
+        border-width: 2px;
+        padding: 14px;
+      }
+      .senior .big {
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      .senior .m-line {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-top: 8px;
+        font-size: 17px;
+      }
+      .senior .m-line svg {
+        width: 20px;
+        height: 20px;
+        flex: none;
+      }
+      .senior .m-btn {
+        font-size: 19px;
+        padding: 15px;
+      }
+      .q-head {
+        background: var(--teal);
+        color: #fff;
+        font-weight: 700;
+        padding: 10px 14px;
+        margin: -14px -14px 10px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        font-size: 17px;
+      }
+      .q-head svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .float-badge {
+        position: absolute;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 12px 14px;
+        display: none;
+        align-items: center;
+        gap: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        max-width: 240px;
+        z-index: 5;
+      }
+      .float-badge .ic {
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: var(--tint);
+        color: var(--teal);
+        flex: none;
+      }
+      .float-badge .ic svg {
+        width: 18px;
+        height: 18px;
+      }
+      .float-badge small {
+        display: block;
+        font-weight: 400;
+        color: var(--text-soft);
+        font-size: 13px;
+      }
+      @media (min-width: 1100px) {
+        .float-badge {
+          display: flex;
+        }
+      }
+
+      /* ---------- Problem ---------- */
+      .cards-3 {
+        display: grid;
+        gap: var(--space-3);
+      }
+      @media (min-width: 800px) {
+        .cards-3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-4);
+      }
+      .card h3 {
+        font-size: 24px;
+        margin: var(--space-3) 0 var(--space-1);
+      }
+      .card p {
+        color: var(--text-soft);
+      }
+      .icon-dot {
+        width: 56px;
+        height: 56px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: var(--tint);
+        color: var(--teal);
+      }
+      .icon-dot svg {
+        width: 26px;
+        height: 26px;
+      }
+      .icon-dot.warn {
+        background: #f9e7e5;
+        color: var(--danger);
+      }
+
+      /* ---------- Two perspectives (interactive) ---------- */
+      .persp {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+      .persp-grid {
+        display: grid;
+        gap: 48px;
+        align-items: center;
+      }
+      @media (min-width: 960px) {
+        .persp-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 80px;
+        }
+      }
+      .seg {
+        display: inline-flex;
+        padding: 6px;
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        gap: 4px;
+        margin-bottom: var(--space-4);
+        max-width: 100%;
+      }
+      .seg button {
+        font: inherit;
+        font-weight: 700;
+        font-size: 16px;
+        min-height: 48px;
+        padding: 10px 18px;
+        white-space: nowrap;
+        border-radius: 999px;
+        border: 0;
+        background: transparent;
+        color: var(--text-soft);
+        cursor: pointer;
+      }
+      .seg button[aria-selected='true'] {
+        background: var(--teal);
+        color: #fff;
+      }
+      .persp-panel h3 {
+        font-size: clamp(26px, 3vw, 34px);
+      }
+      .persp-panel .who {
+        color: var(--text-soft);
+        margin-top: var(--space-1);
+      }
+      .ticks {
+        list-style: none;
+        padding: 0;
+        margin: var(--space-3) 0 0;
+        display: grid;
+        gap: var(--space-2);
+      }
+      .ticks li {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+      }
+      .ticks .tk {
+        width: 30px;
+        height: 30px;
+        border-radius: 999px;
+        background: var(--tint);
+        color: var(--teal);
+        display: grid;
+        place-items: center;
+        flex: none;
+        margin-top: 1px;
+      }
+      .ticks .tk svg {
+        width: 16px;
+        height: 16px;
+      }
+      .ticks b {
+        display: block;
+      }
+      .ticks span.d {
+        color: var(--text-soft);
+      }
+      [hidden] {
+        display: none !important;
+      }
+
+      /* ---------- Benefits ---------- */
+      .benefits {
+        display: grid;
+        gap: var(--space-3);
+      }
+      @media (min-width: 760px) {
+        .benefits {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      .benefit {
+        display: flex;
+        gap: var(--space-3);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-4);
+      }
+      .benefit .icon-dot {
+        flex: none;
+      }
+      .benefit .gain {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--success);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 6px;
+      }
+      .benefit .gain svg {
+        width: 16px;
+        height: 16px;
+      }
+      .benefit h3 {
+        font-size: 22px;
+        margin-bottom: var(--space-1);
+      }
+      .benefit p {
+        color: var(--text-soft);
+      }
+      .planned {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-soft);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 2px 8px;
+        margin-left: 6px;
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+
+      /* ---------- Comparison table ---------- */
+      .compare-wrap {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+      }
+      .compare {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 17px;
+      }
+      .compare th,
+      .compare td {
+        padding: 18px 20px;
+        text-align: left;
+        vertical-align: middle;
+        border-bottom: 1px solid var(--tint);
+      }
+      .compare thead th {
+        font-size: 16px;
+        color: var(--text-soft);
+        background: var(--background);
+        border-bottom: 1px solid var(--border);
+      }
+      .compare thead th.us {
+        background: var(--teal);
+        color: #fff;
+        font-size: 18px;
+      }
+      .compare td.us {
+        background: rgba(227, 238, 242, 0.55);
+        font-weight: 700;
+      }
+      .compare tbody tr:last-child td,
+      .compare tbody tr:last-child th {
+        border-bottom: 0;
+      }
+      .compare tbody th {
+        font-weight: 700;
+        width: 40%;
+      }
+      .compare tbody th small {
+        display: block;
+        font-weight: 400;
+        color: var(--text-soft);
+        font-size: 15px;
+      }
+      .yes,
+      .no,
+      .part {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .yes svg,
+      .no svg,
+      .part svg {
+        width: 22px;
+        height: 22px;
+        flex: none;
+      }
+      .yes {
+        color: var(--success);
+      }
+      .no {
+        color: var(--text-soft);
+        font-weight: 400;
+      }
+      .part {
+        color: var(--text-soft);
+      }
+      .compare-note {
+        color: var(--text-soft);
+        font-size: 15px;
+        margin-top: var(--space-2);
+      }
+      /* Mobile: stack rows into cards */
+      @media (max-width: 760px) {
+        .compare thead {
+          display: none;
+        }
+        .compare,
+        .compare tbody,
+        .compare tr,
+        .compare th,
+        .compare td {
+          display: block;
+          width: 100%;
+        }
+        .compare tr {
+          padding: 16px 18px;
+          border-bottom: 1px solid var(--border);
+        }
+        .compare tbody tr:last-child {
+          border-bottom: 0;
+        }
+        .compare th,
+        .compare td {
+          padding: 4px 0;
+          border: 0;
+        }
+        .compare td.us {
+          background: none;
+        }
+        .compare tbody th {
+          width: 100%;
+          padding-bottom: 8px;
+        }
+        .compare td::before {
+          content: attr(data-col) ': ';
+          font-weight: 700;
+          color: var(--text);
+          font-size: 15px;
+          min-width: 120px;
+          display: inline-block;
+        }
+      }
+
+      /* ---------- Who it's for / evidence ---------- */
+      .stats {
+        display: grid;
+        gap: var(--space-3);
+      }
+      @media (min-width: 800px) {
+        .stats {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .stat {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-4);
+      }
+      .stat .n {
+        font-size: clamp(44px, 5vw, 56px);
+        font-weight: 700;
+        color: var(--teal);
+        line-height: 1;
+      }
+      .stat p {
+        margin-top: var(--space-2);
+        color: var(--text-soft);
+      }
+      .source {
+        font-size: 14px;
+        color: var(--text-soft);
+        margin-top: var(--space-2);
+      }
+      .quotes {
+        display: grid;
+        gap: var(--space-3);
+        margin-top: var(--space-4);
+      }
+      @media (min-width: 800px) {
+        .quotes {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .quote {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-4);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+      }
+      .quote blockquote {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+      .quote .by {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--text-soft);
+        font-size: 16px;
+        margin-top: auto;
+      }
+      .quote .by .m-avatar {
+        width: 44px;
+        height: 44px;
+      }
+      .quote dl {
+        margin: 0;
+        display: grid;
+        gap: 6px;
+        font-size: 16px;
+      }
+      .quote dt {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin-top: 8px;
+      }
+      .quote dd {
+        margin: 0;
+        color: var(--text-soft);
+      }
+
+      /* ---------- Pricing ---------- */
+      .pricing {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+      .plans {
+        display: grid;
+        gap: var(--space-3);
+        max-width: 880px;
+        margin: 0 auto;
+      }
+      @media (min-width: 800px) {
+        .plans {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .plan {
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-4);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+        background: var(--background);
+      }
+      .plan.featured {
+        border: 2px solid var(--teal);
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        position: relative;
+      }
+      .plan .tag {
+        align-self: flex-start;
+        background: var(--tint);
+        color: var(--teal);
+        font-weight: 700;
+        font-size: 14px;
+        border-radius: 999px;
+        padding: 4px 12px;
+      }
+      .plan h3 {
+        font-size: 24px;
+      }
+      .price {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+      }
+      .price .amt {
+        font-size: 52px;
+        font-weight: 700;
+        line-height: 1;
+      }
+      .price .per {
+        color: var(--text-soft);
+      }
+      .plan ul {
+        list-style: none;
+        padding: 0;
+        margin: var(--space-1) 0 var(--space-2);
+        display: grid;
+        gap: 10px;
+      }
+      .plan li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .plan li svg {
+        width: 20px;
+        height: 20px;
+        color: var(--success);
+        flex: none;
+        margin-top: 3px;
+      }
+      .plan .btn {
+        margin-top: auto;
+        width: 100%;
+      }
+      .price-note {
+        text-align: center;
+        color: var(--text-soft);
+        font-size: 16px;
+        margin-top: var(--space-3);
+      }
+
+      /* ---------- FAQ ---------- */
+      .faq-grid {
+        display: grid;
+        gap: 48px;
+      }
+      @media (min-width: 960px) {
+        .faq-grid {
+          grid-template-columns: 0.8fr 1.2fr;
+          gap: 80px;
+        }
+      }
+      .faq {
+        display: grid;
+        gap: 12px;
+      }
+      .faq details {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+      }
+      .faq details[open] {
+        border-color: var(--teal);
+      }
+      .faq summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 20px 22px;
+        min-height: 56px;
+        font-weight: 700;
+        font-size: 19px;
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-2);
+        align-items: center;
+      }
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+      .faq summary svg {
+        width: 22px;
+        height: 22px;
+        color: var(--teal);
+        flex: none;
+        transition: transform 0.2s;
+      }
+      .faq details[open] summary svg {
+        transform: rotate(180deg);
+      }
+      .faq .a {
+        padding: 0 22px 22px;
+        color: var(--text-soft);
+      }
+      .support-card {
+        margin-top: var(--space-4);
+        background: var(--tint);
+        border-radius: var(--radius-lg);
+        padding: var(--space-3);
+      }
+      .support-card h3 {
+        font-size: 20px;
+        margin-bottom: 6px;
+      }
+      .support-card p {
+        color: var(--text-soft);
+        font-size: 17px;
+      }
+      .support-card a {
+        color: var(--teal);
+        font-weight: 700;
+      }
+
+      /* ---------- Final CTA ---------- */
+      .final {
+        padding: 0 0 104px;
+      }
+      .final-box {
+        border-radius: 36px;
+        padding: 64px 28px;
+        text-align: center;
+        color: #fff;
+        background:
+          radial-gradient(120% 140% at 0% 100%, #1d6b62 0%, transparent 55%),
+          radial-gradient(90% 120% at 100% 0%, #2f5b86 0%, transparent 55%),
+          var(--teal-pressed);
+      }
+      @media (min-width: 800px) {
+        .final-box {
+          padding: 88px 48px;
+        }
+      }
+      .final-box h2 {
+        font-size: clamp(32px, 4.5vw, 48px);
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .final-box p {
+        margin: var(--space-2) auto 0;
+        max-width: 600px;
+        color: #cfe2e8;
+        font-size: 20px;
+      }
+      .final-box .cta-row {
+        justify-content: center;
+      }
+
+      /* ---------- Footer ---------- */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 48px 0 32px;
+        color: var(--text-soft);
+        font-size: 16px;
+      }
+      .foot-grid {
+        display: grid;
+        gap: var(--space-4);
+      }
+      @media (min-width: 800px) {
+        .foot-grid {
+          grid-template-columns: 1.4fr 1fr 1fr;
+        }
+      }
+      footer h4 {
+        margin: 0 0 12px;
+        color: var(--text);
+        font-size: 16px;
+      }
+      footer ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 8px;
+      }
+      footer a {
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: var(--teal);
+        text-decoration: underline;
+      }
+      .foot-bottom {
+        margin-top: 40px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 14px;
+      }
+
+      /* Sticky mobile CTA */
+      .mobile-cta {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        z-index: 40;
+        transform: translateY(140%);
+        transition: transform 0.25s;
+        box-shadow: 0 10px 30px rgba(10, 54, 64, 0.35);
+      }
+      .mobile-cta.show {
+        transform: none;
+      }
+      @media (min-width: 900px) {
+        .mobile-cta {
+          display: none;
+        }
+      }
+
+      /* Reveal on scroll */
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Inline icon sprite (Lucide-style, matches the app's lucide-react-native set) -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 2 6 10h3l-5 7h5v5h6v-5h5l-5-7h3z" fill="currentColor" /></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></symbol>
+      <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z" /><circle cx="12" cy="13" r="3" /></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></symbol>
+      <symbol id="i-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01" /></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></symbol>
+      <symbol id="i-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" /></symbol>
+      <symbol id="i-x-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="m15 9-6 6M9 9l6 6" /></symbol>
+      <symbol id="i-minus-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 12h8" /></symbol>
+      <symbol id="i-steth" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2M5 2v2M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" /><path d="M8 15a6 6 0 0 0 12 0v-3" /><circle cx="20" cy="10" r="2" /></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></symbol>
+      <symbol id="i-pill" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z" /><path d="m8.5 8.5 7 7" /></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /><path d="M14 2v4a2 2 0 0 0 2 2h4M16 13H8M16 17H8M10 9H8" /></symbol>
+      <symbol id="i-question" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01" /></symbol>
+      <symbol id="i-chev-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></symbol>
+      <symbol id="i-chev-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="m10 8 6 4-6 4Z" fill="currentColor" /></symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7z" /><path d="m2 17 10 5 10-5M2 12l10 5 10-5" /></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" /></symbol>
+      <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="M9 22V12h6v10" /></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 12h8M12 8v8" /></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 0 0-16 0" /></symbol>
+      <symbol id="i-maple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-6M12 16l-6 1 1-3-4-4 2-1-1-4 4 1 1-2 3 4 3-4 1 2 4-1-1 4 2 1-4 4 1 3z" /></symbol>
+    </svg>
+
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- ===================== NAV ===================== -->
+    <header class="nav" id="top">
+      <div class="wrap">
+        <a class="brand" href="#top" aria-label="Vitalitree home">
+          <span class="brand-mark" aria-hidden="true"
+            ><svg style="color: #fff"><use href="#i-tree" /></svg
+          ></span>
+          Vitalitree<span class="ph" title="Placeholder: final logo + wordmark from VBIZ-014">*</span>
+        </a>
+        <nav aria-label="Primary">
+          <ul class="nav-links">
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#difference">Why Vitalitree</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+        <a class="btn btn-primary demo-link" href="#" target="_blank" rel="noopener">
+          Try live demo<span class="ph" style="color: #ffb4ad" title="Placeholder: live demo URL from VDEV-024">*</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ===================== HERO ===================== -->
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <span class="eyebrow">For families caring for an aging parent</span>
+            <h1>Your family's health records, <em>finally in one place.</em></h1>
+            <p class="lede">
+              Vitalitree gives your whole family one simple, shared, private health record. Snap a
+              photo of any medical document, prepare for appointments together, and stop chasing
+              updates through group chats.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary demo-link" href="#" target="_blank" rel="noopener">
+                Try the live demo
+                <svg aria-hidden="true"><use href="#i-arrow" /></svg>
+              </a>
+              <a class="btn btn-secondary" href="#video">
+                <svg aria-hidden="true"><use href="#i-play" /></svg>
+                Watch 2-min video<span class="ph" title="Placeholder: fallback demo video (VDEV-024)">*</span>
+              </a>
+            </div>
+            <ul class="trust-row" aria-label="Highlights">
+              <li><svg aria-hidden="true"><use href="#i-check-circle" /></svg>No credit card to try</li>
+              <li><svg aria-hidden="true"><use href="#i-check-circle" /></svg>Canadian-hosted &amp; encrypted</li>
+              <li><svg aria-hidden="true"><use href="#i-check-circle" /></svg>You choose who sees what</li>
+            </ul>
+          </div>
+
+          <!-- Phone: caregiver "Your Care Circle" screen (POC app/(tabs)/family.tsx) -->
+          <div class="phone-stage" aria-label="Vitalitree app: caregiver view of the family care circle">
+            <div class="float-badge" style="left: -24px; top: 330px" aria-hidden="true">
+              <span class="ic"><svg><use href="#i-camera" /></svg></span>
+              <span>Lab result added<small>From a photo · no typing</small></span>
+            </div>
+            <div class="float-badge" style="right: -28px; bottom: 56px" aria-hidden="true">
+              <span class="ic"><svg><use href="#i-users" /></svg></span>
+              <span>David saw the update<small>Everyone's on the same page</small></span>
+            </div>
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+                <div class="app-head">
+                  <div class="s">Good morning, Sarah</div>
+                  <div class="t">Your Care Circle</div>
+                </div>
+                <div class="app-body">
+                  <div class="m-card focus">
+                    <div class="m-row">
+                      <div class="m-avatar">M</div>
+                      <div style="flex: 1">
+                        <div class="m-row" style="gap: 6px">
+                          <span class="m-name">Mary</span><span class="m-chip">Mom · 76</span>
+                        </div>
+                        <div class="m-meta">Victoria, BC</div>
+                      </div>
+                      <span class="m-chip tint">Tomorrow</span>
+                    </div>
+                    <div class="m-card" style="margin-top: 10px; background: var(--tint); border-color: var(--tint)">
+                      <div class="m-label"><svg><use href="#i-calendar" /></svg>Upcoming appointment</div>
+                      <div class="m-name" style="margin-top: 4px">Cardiology with Dr. Chen</div>
+                      <div class="m-meta">Tomorrow · 10:30 AM · Victoria Heart Health Clinic</div>
+                    </div>
+                    <div class="m-row" style="margin-top: 10px; gap: 8px">
+                      <div class="m-btn" style="flex: 1; padding: 10px">
+                        <svg><use href="#i-question" /></svg>Suggest a question
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="m-card">
+                    <div class="m-label"><svg><use href="#i-pill" /></svg>Active medication</div>
+                    <div class="m-name" style="margin-top: 4px">Lisinopril 10mg</div>
+                    <div class="m-meta">Linked to tomorrow's visit</div>
+                  </div>
+
+                  <div class="m-sub">Other family members</div>
+                  <div class="m-card" style="display: grid; gap: 10px">
+                    <div class="m-row">
+                      <div class="m-avatar sm">D</div>
+                      <div style="flex: 1"><div class="m-name" style="font-size: 14px">David <span class="m-chip">Dad</span></div><div class="m-meta">All records current</div></div>
+                      <svg class="m-ico"><use href="#i-chev-right" /></svg>
+                    </div>
+                    <div class="m-row">
+                      <div class="m-avatar sm">L</div>
+                      <div style="flex: 1"><div class="m-name" style="font-size: 14px">Lucas <span class="m-chip">Son</span></div><div class="m-meta">Pediatric checkup complete</div></div>
+                      <svg class="m-ico"><use href="#i-chev-right" /></svg>
+                    </div>
+                    <div class="m-row">
+                      <div class="m-avatar sm">E</div>
+                      <div style="flex: 1"><div class="m-name" style="font-size: 14px">Emma <span class="m-chip">Daughter</span></div><div class="m-meta">Vaccinations up to date</div></div>
+                      <svg class="m-ico"><use href="#i-chev-right" /></svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="tabbar">
+                  <span><svg><use href="#i-home" /></svg>Home</span>
+                  <span><svg><use href="#i-file" /></svg>Records</span>
+                  <span><svg><use href="#i-plus" /></svg>Add</span>
+                  <span class="on"><svg><use href="#i-users" /></svg>Family</span>
+                  <span><svg><use href="#i-user" /></svg>Profile</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PROBLEM ===================== -->
+      <section id="problem" style="padding-top: 0">
+        <div class="wrap">
+          <div class="section-head center reveal">
+            <span class="eyebrow">The problem</span>
+            <h2>Family health information is everywhere except where you need it.</h2>
+            <p>When you're looking after a parent <em>and</em> your own household, the details pile up fast.</p>
+          </div>
+          <div class="cards-3">
+            <article class="card reveal">
+              <span class="icon-dot warn"><svg aria-hidden="true"><use href="#i-layers" /></svg></span>
+              <h3>Scattered</h3>
+              <p>Results live in portals, paper folders, texts and a different login for every clinic.</p>
+            </article>
+            <article class="card reveal">
+              <span class="icon-dot warn"><svg aria-hidden="true"><use href="#i-users" /></svg></span>
+              <h3>Out of sync</h3>
+              <p>Siblings work from different information, and important updates get buried in the group chat.</p>
+            </article>
+            <article class="card reveal">
+              <span class="icon-dot warn"><svg aria-hidden="true"><use href="#i-clock" /></svg></span>
+              <h3>Easy to miss</h3>
+              <p>Refills, follow-ups and what the doctor actually said are forgotten by the drive home.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== TWO PERSPECTIVES ===================== -->
+      <section class="persp" id="perspectives">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <span class="eyebrow">One record, two views</span>
+            <h2>Independence for your parent. Peace of mind for you.</h2>
+            <p>
+              Vitalitree is built for both sides of the care relationship, so nobody has to give up
+              control to stay in the loop.
+            </p>
+          </div>
+
+          <div class="persp-grid">
+            <div class="reveal">
+              <div class="seg" role="tablist" aria-label="Choose a perspective">
+                <button role="tab" id="tab-senior" aria-controls="panel-senior" aria-selected="true">Mary, 76</button>
+                <button role="tab" id="tab-care" aria-controls="panel-care" aria-selected="false" tabindex="-1">Sarah, her daughter</button>
+              </div>
+
+              <div class="persp-panel" role="tabpanel" id="panel-senior" aria-labelledby="tab-senior">
+                <h3>Stay in charge of your own health.</h3>
+                <p class="who">Large, clear screens designed for older eyes and hands.</p>
+                <ul class="ticks">
+                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>See what's next at a glance</b><span class="d">Who, when and where, in big, readable type.</span></span></li>
+                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>Walk in prepared</b><span class="d">Questions your family suggested are waiting for you to approve.</span></span></li>
+                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>You decide what's shared</b><span class="d">Keep any question or record private, just for you and your doctor.</span></span></li>
+                </ul>
+              </div>
+
+              <div class="persp-panel" role="tabpanel" id="panel-care" aria-labelledby="tab-care" hidden>
+                <h3>Know what's happening without the phone tag.</h3>
+                <p class="who">One place the whole family can check, wherever you live.</p>
+                <ul class="ticks">
+                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>Everyone in one care circle</b><span class="d">Parents and kids side by side, each with their own records.</span></span></li>
+                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>Suggest questions before the visit</b><span class="d">Mom approves them, then the doctor's answers are shared back.</span></span></li>
+                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>Help from a distance</b><span class="d">Long-distance siblings see the same up-to-date information.</span></span></li>
+                </ul>
+              </div>
+
+              <div class="cta-row">
+                <a class="btn btn-primary demo-link" href="#" target="_blank" rel="noopener">
+                  Try both views in the demo
+                  <svg aria-hidden="true"><use href="#i-arrow" /></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="phone-stage reveal">
+              <!-- Senior screen (POC components/demo/SeniorAppointmentCard.tsx) -->
+              <div class="phone" data-view="senior" aria-label="Mary's view: large-text upcoming visit screen">
+                <div class="screen senior">
+                  <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+                  <div class="app-head"><div class="t">Hello, Mary</div></div>
+                  <div class="app-body">
+                    <div class="m-card">
+                      <div class="m-label" style="font-size: 14px"><svg><use href="#i-calendar" /></svg>Upcoming visit</div>
+                      <div class="big" style="margin-top: 6px">Tomorrow</div>
+                      <div class="m-line"><svg><use href="#i-steth" /></svg>Dr. Bob Chen, Cardiology</div>
+                      <div class="m-line"><svg><use href="#i-clock" /></svg><b>10:30 AM</b></div>
+                      <div class="m-line"><svg><use href="#i-pin" /></svg>Victoria Heart Health Clinic</div>
+                    </div>
+                    <div class="m-card focus" style="overflow: hidden">
+                      <div class="q-head"><svg><use href="#i-question" /></svg>Sarah suggested a question</div>
+                      <div style="font-size: 17px">"Could the afternoon dizziness be from my Lisinopril?"</div>
+                      <div style="display: grid; gap: 8px; margin-top: 12px">
+                        <div class="m-btn" style="font-size: 16px; padding: 12px">Add to Doctor Briefing</div>
+                        <div class="m-btn outline" style="font-size: 16px; padding: 10px">Keep Private</div>
+                      </div>
+                    </div>
+                    <div class="m-btn"><svg><use href="#i-steth" /></svg>Show Doctor</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Caregiver screen -->
+              <div class="phone" data-view="care" aria-label="Sarah's view: suggest a question for Mom's visit" hidden>
+                <div class="screen">
+                  <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+                  <div class="app-head">
+                    <div class="s">Mary · Cardiology · Tomorrow 10:30 AM</div>
+                    <div class="t">Visit Questions</div>
+                  </div>
+                  <div class="app-body">
+                    <div class="m-card">
+                      <div class="m-label"><svg><use href="#i-question" /></svg>Suggest a question</div>
+                      <div class="m-card" style="margin-top: 8px; min-height: 64px; color: var(--text-soft)">Ask about her new BP readings…</div>
+                      <div class="m-btn" style="margin-top: 8px">Submit Question</div>
+                    </div>
+                    <div class="m-sub">Sent to Mom</div>
+                    <div class="m-card">
+                      <div class="m-row" style="justify-content: space-between"><span class="m-name" style="font-size: 14px">Could the dizziness be from Lisinopril?</span></div>
+                      <div class="m-row" style="margin-top: 6px; gap: 6px"><span class="m-chip tint">Approved by Mom</span><span class="m-meta">9:12 AM</span></div>
+                      <div class="m-card" style="margin-top: 8px; background: #eaf4ee; border-color: #cfe5d7">
+                        <div class="m-label" style="color: var(--success)"><svg style="color: var(--success)"><use href="#i-check-circle" /></svg>Dr. Chen answered</div>
+                        <div style="margin-top: 4px">Likely related. Lowering to 5mg; recheck in 2 weeks.</div>
+                      </div>
+                    </div>
+                    <div class="m-card">
+                      <div class="m-label"><svg><use href="#i-file" /></svg>Recent relevant records</div>
+                      <div class="m-row" style="margin-top: 8px"><svg class="m-ico"><use href="#i-file" /></svg><div style="flex: 1"><div class="m-name" style="font-size: 14px">Blood Pressure Log</div><div class="m-meta">Updated 2 days ago</div></div></div>
+                    </div>
+                  </div>
+                  <div class="tabbar">
+                    <span><svg><use href="#i-home" /></svg>Home</span>
+                    <span><svg><use href="#i-file" /></svg>Records</span>
+                    <span><svg><use href="#i-plus" /></svg>Add</span>
+                    <span class="on"><svg><use href="#i-users" /></svg>Family</span>
+                    <span><svg><use href="#i-user" /></svg>Profile</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== HOW IT WORKS / BENEFITS ===================== -->
+      <section id="how">
+        <div class="wrap">
+          <div class="section-head center reveal">
+            <span class="eyebrow">How it helps</span>
+            <h2>Less time managing paperwork. More time with family.</h2>
+          </div>
+          <div class="benefits">
+            <article class="benefit reveal">
+              <span class="icon-dot"><svg aria-hidden="true"><use href="#i-camera" /></svg></span>
+              <div>
+                <span class="gain"><svg aria-hidden="true"><use href="#i-check" /></svg>Save time</span>
+                <h3>Snap a photo. It becomes a record.</h3>
+                <p>Lab results, prescriptions, doctor's notes. Take a picture and Vitalitree files it, searchable in seconds. No typing.</p>
+              </div>
+            </article>
+            <article class="benefit reveal">
+              <span class="icon-dot"><svg aria-hidden="true"><use href="#i-users" /></svg></span>
+              <div>
+                <span class="gain"><svg aria-hidden="true"><use href="#i-check" /></svg>Everyone on the same page</span>
+                <h3>One family care circle</h3>
+                <p>Invite siblings, partners or a parent. Everyone you invite sees the same up-to-date information, instantly.</p>
+              </div>
+            </article>
+            <article class="benefit reveal">
+              <span class="icon-dot"><svg aria-hidden="true"><use href="#i-clipboard" /></svg></span>
+              <div>
+                <span class="gain"><svg aria-hidden="true"><use href="#i-check" /></svg>Peace of mind</span>
+                <h3>Walk into every visit prepared</h3>
+                <p>Collect the family's questions beforehand, hand the doctor a clear briefing, and share what they said afterward.</p>
+              </div>
+            </article>
+            <article class="benefit reveal">
+              <span class="icon-dot"><svg aria-hidden="true"><use href="#i-bell" /></svg></span>
+              <div>
+                <span class="gain"><svg aria-hidden="true"><use href="#i-check" /></svg>Nothing slips through</span>
+                <h3>Reminders and a shared calendar <span class="planned">Coming soon</span></h3>
+                <p>Refills and follow-ups, synced to everyone's phone calendar.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== DRAMATIC DIFFERENCE ===================== -->
+      <section id="difference" style="padding-top: 0">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <span class="eyebrow">Why Vitalitree</span>
+            <h2>Patient portals were built for clinics. Vitalitree is built for families.</h2>
+            <p>
+              Hospital and provincial portals show you one person's records from one system. We bring
+              every record, from every provider, into one place the whole family can share.
+            </p>
+          </div>
+
+          <div class="compare-wrap reveal">
+            <table class="compare">
+              <thead>
+                <tr>
+                  <th scope="col"><span class="sr-only">Feature</span></th>
+                  <th scope="col" class="us">Vitalitree</th>
+                  <th scope="col">Hospital &amp; provincial portals</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Whole family in one place<small>Parents, kids and partners in one care circle</small></th>
+                  <td class="us" data-col="Vitalitree"><span class="yes"><svg aria-hidden="true"><use href="#i-check-circle" /></svg>Built in</span></td>
+                  <td data-col="Portals"><span class="part"><svg aria-hidden="true"><use href="#i-minus-circle" /></svg>Limited proxy access, if offered</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Records from any provider<small>Paper, PDFs, any clinic or province</small></th>
+                  <td class="us" data-col="Vitalitree"><span class="yes"><svg aria-hidden="true"><use href="#i-check-circle" /></svg>Snap a photo of anything</span></td>
+                  <td data-col="Portals"><span class="no"><svg aria-hidden="true"><use href="#i-x-circle" /></svg>Only their own system</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Visit prep with family questions</th>
+                  <td class="us" data-col="Vitalitree"><span class="yes"><svg aria-hidden="true"><use href="#i-check-circle" /></svg>Doctor briefing + shared answers</span></td>
+                  <td data-col="Portals"><span class="no"><svg aria-hidden="true"><use href="#i-x-circle" /></svg>Not available</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Per-person sharing controls</th>
+                  <td class="us" data-col="Vitalitree"><span class="yes"><svg aria-hidden="true"><use href="#i-check-circle" /></svg>Each person approves what's shared</span></td>
+                  <td data-col="Portals"><span class="part"><svg aria-hidden="true"><use href="#i-minus-circle" /></svg>All-or-nothing proxy</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Designed for older adults<small>Large text, big buttons, fewer screens</small></th>
+                  <td class="us" data-col="Vitalitree"><span class="yes"><svg aria-hidden="true"><use href="#i-check-circle" /></svg>Accessibility-first</span></td>
+                  <td data-col="Portals"><span class="part"><svg aria-hidden="true"><use href="#i-minus-circle" /></svg>Varies</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">One login for everything</th>
+                  <td class="us" data-col="Vitalitree"><span class="yes"><svg aria-hidden="true"><use href="#i-check-circle" /></svg>Yes</span></td>
+                  <td data-col="Portals"><span class="no"><svg aria-hidden="true"><use href="#i-x-circle" /></svg>A login per clinic</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="compare-note">
+            Based on our team's review of MyChart, BC Health Gateway and similar portals (Oct 2026).
+            Features vary by provider.<span class="ph" title="Placeholder: confirm comparison claims with BCOM team / VBIZ-014">*</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================== WHO IT'S FOR / EVIDENCE ===================== -->
+      <section id="who" style="padding-top: 0">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <span class="eyebrow">Who it's for</span>
+            <h2>Made for the "sandwich generation."</h2>
+            <p>
+              Adults caring for their kids and their aging parents at the same time. They manage health
+              information for several people, so scattered records hurt them the most.
+            </p>
+          </div>
+          <div class="stats">
+            <div class="stat reveal"><div class="n">1.8M</div><p>sandwich caregivers in Canada</p></div>
+            <div class="stat reveal"><div class="n">49%</div><p>of them are aged 35 to 54, juggling careers, kids and parents</p></div>
+            <div class="stat reveal"><div class="n">8 / 10</div><p>people we interviewed said they'd download and use Vitalitree</p></div>
+          </div>
+          <p class="source">
+            Sources: Statistics Canada, <i>"Sandwiched" between unpaid care for children and care-dependent adults</i> (2024, 2022 data);
+            Vitalitree customer interviews (10 patients, 2 caregivers).
+          </p>
+
+          <div class="quotes">
+            <figure class="quote reveal">
+              <dl>
+                <dt>Family coordinator · 40 · Haida Gwaii, BC</dt>
+                <dd>Juggles a phone calendar, paper, a spreadsheet and two health apps.</dd>
+              </dl>
+              <blockquote>
+                "[Real interview quote about information being spread across platforms]"<span class="ph" title="Placeholder: approved quote from interview notes">*</span>
+              </blockquote>
+              <figcaption class="by"><span class="m-avatar" aria-hidden="true"><svg style="width: 20px; height: 20px"><use href="#i-home" /></svg></span>Caregiver interview, Milestone 2</figcaption>
+            </figure>
+            <figure class="quote reveal">
+              <dl>
+                <dt>Long-distance caregiver · 48 · Vancouver, BC</dt>
+                <dd>Relies on family group chats, a shared calendar, email and photos.</dd>
+              </dl>
+              <blockquote>
+                "[Real interview quote about updates getting buried in texts]"<span class="ph" title="Placeholder: approved quote from interview notes">*</span>
+              </blockquote>
+              <figcaption class="by"><span class="m-avatar" aria-hidden="true"><svg style="width: 20px; height: 20px"><use href="#i-users" /></svg></span>Caregiver interview, Milestone 2</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== DEMO VIDEO ===================== -->
+      <section id="video" style="padding-top: 0">
+        <div class="wrap">
+          <div class="section-head center reveal">
+            <span class="eyebrow">See it in action</span>
+            <h2>Two minutes, start to finish.</h2>
+            <p>Watch Sarah suggest a question, Mary approve it, and Dr. Chen's answer reach the whole family.</p>
+          </div>
+          <div class="ph-box reveal" style="aspect-ratio: 16 / 9; display: grid; place-items: center; text-align: center; max-width: 960px; margin: 0 auto">
+            <div>
+              <svg aria-hidden="true" style="width: 56px; height: 56px; margin: 0 auto 12px"><use href="#i-play" /></svg>
+              <b>* Demo video embed goes here</b><br />
+              Fallback recording from VDEV-024 (YouTube / Vimeo / MP4)
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PRICING ===================== -->
+      <section class="pricing" id="pricing">
+        <div class="wrap">
+          <div class="section-head center reveal">
+            <span class="eyebrow">Pricing</span>
+            <h2>Simple pricing. One plan covers the whole family.</h2>
+            <p>No hidden fees, and no credit card needed to try the demo.</p>
+          </div>
+          <div class="plans">
+            <article class="plan reveal">
+              <h3>Free<span class="ph" title="Placeholder: confirm free tier exists + its limits (BMC)">*</span></h3>
+              <div class="price"><span class="amt">$0</span><span class="per">CAD</span></div>
+              <p style="color: var(--text-soft)">Get organized on your own.</p>
+              <ul>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>1 person<span class="ph" title="Placeholder: free tier limits">*</span></span></li>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Photo record capture<span class="ph" title="Placeholder: free tier limits (e.g. # of records)">*</span></span></li>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Encrypted, Canadian-hosted storage</span></li>
+              </ul>
+              <a class="btn btn-secondary demo-link" href="#" target="_blank" rel="noopener">Start free</a>
+            </article>
+            <article class="plan featured reveal">
+              <span class="tag">Recommended for families</span>
+              <h3>Family</h3>
+              <div class="price"><span class="amt">$8</span><span class="per">CAD / month<span class="ph" title="Placeholder: $8 CAD/mo tested in M2 interviews; confirm final price + annual option in BMC">*</span></span></div>
+              <p style="color: var(--text-soft)">Everything your care circle needs.</p>
+              <ul>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Your whole family care circle<span class="ph" title="Placeholder: member limit, if any">*</span></span></li>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Unlimited photo records<span class="ph" title="Placeholder: confirm limits">*</span></span></li>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Visit prep, doctor briefings &amp; shared answers</span></li>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Per-person sharing controls</span></li>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Reminders &amp; calendar sync <span class="planned">Coming soon</span></span></li>
+              </ul>
+              <a class="btn btn-primary demo-link" href="#" target="_blank" rel="noopener">Try the live demo</a>
+            </article>
+          </div>
+          <p class="price-note">
+            Cancel anytime<span class="ph" title="Placeholder: confirm cancellation / trial terms">*</span>
+            · Prices in Canadian dollars
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================== FAQ ===================== -->
+      <section id="faq">
+        <div class="wrap faq-grid">
+          <div class="reveal">
+            <span class="eyebrow">FAQ</span>
+            <h2 style="font-size: clamp(30px, 4.2vw, 44px)">Questions families ask us</h2>
+            <div class="support-card">
+              <h3>Still have a question?</h3>
+              <p>
+                We're happy to help. Email us at
+                <a href="#">hello@vitalitree.ca</a><span class="ph" title="Placeholder: real support email / contact form">*</span>
+              </p>
+            </div>
+          </div>
+          <div class="faq reveal">
+            <details>
+              <summary>Where is my family's data stored?<svg aria-hidden="true"><use href="#i-chev-down" /></svg></summary>
+              <div class="a">
+                Your records are encrypted and stored on servers in Canada.<span class="ph" title="Placeholder: name hosting provider + encryption details, privacy policy link">*</span>
+                We never sell your data.<span class="ph" title="Placeholder: confirm with privacy policy">*</span>
+              </div>
+            </details>
+            <details>
+              <summary>Who can see my records?<svg aria-hidden="true"><use href="#i-chev-down" /></svg></summary>
+              <div class="a">
+                Only the people you invite, and only what you choose to share. Each person controls their own
+                records, so a parent can keep anything private, even from family.
+              </div>
+            </details>
+            <details>
+              <summary>Does my parent need to be good with technology?<svg aria-hidden="true"><use href="#i-chev-down" /></svg></summary>
+              <div class="a">
+                No. The senior view uses large text, big buttons and only a few screens. Family members can
+                also help add records on their behalf.
+              </div>
+            </details>
+            <details>
+              <summary>Does it connect to MyChart or BC Health Gateway?<svg aria-hidden="true"><use href="#i-chev-down" /></svg></summary>
+              <div class="a">
+                Not directly today. Instead, you can add a record from any source by snapping a photo or
+                uploading a PDF, which works with every clinic and province.
+                <span class="ph" title="Placeholder: any planned integrations?">*</span>
+              </div>
+            </details>
+            <details>
+              <summary>How much does it cost?<svg aria-hidden="true"><use href="#i-chev-down" /></svg></summary>
+              <div class="a">
+                The Family plan is $8 CAD per month for your whole care circle.<span class="ph" title="Placeholder: confirm final pricing">*</span>
+                You can try the live demo for free without an account or credit card.
+              </div>
+            </details>
+            <details>
+              <summary>Can I use it today?<svg aria-hidden="true"><use href="#i-chev-down" /></svg></summary>
+              <div class="a">
+                Vitalitree is in early release. You can try the full experience in our live demo now, and
+                join the waitlist for launch.<span class="ph" title="Placeholder: launch date / waitlist link">*</span>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== FINAL CTA ===================== -->
+      <section class="final">
+        <div class="wrap">
+          <div class="final-box reveal">
+            <h2>Give your family one place to care, together.</h2>
+            <p>See how Vitalitree works for both you and the people you look after. It takes two minutes.</p>
+            <div class="cta-row">
+              <a class="btn btn-light demo-link" href="#" target="_blank" rel="noopener">
+                Try the live demo<span class="ph" title="Placeholder: live demo URL from VDEV-024">*</span>
+                <svg aria-hidden="true"><use href="#i-arrow" /></svg>
+              </a>
+              <a class="btn btn-ghost-light" href="#video">Watch the video</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <a class="brand" href="#top" style="margin-bottom: 12px">
+              <span class="brand-mark" aria-hidden="true"><svg style="color: #fff"><use href="#i-tree" /></svg></span>
+              Vitalitree
+            </a>
+            <p>One simple, shared, private place for your family's health records. Proudly built in Victoria, BC.</p>
+          </div>
+          <div>
+            <h4>Product</h4>
+            <ul>
+              <li><a href="#how">How it works</a></li>
+              <li><a href="#difference">Why Vitalitree</a></li>
+              <li><a href="#pricing">Pricing</a></li>
+              <li><a class="demo-link" href="#" target="_blank" rel="noopener">Live demo</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#faq">FAQ &amp; support</a></li>
+              <li><a href="#">Privacy policy</a><span class="ph" title="Placeholder: privacy policy page">*</span></li>
+              <li><a href="#">Terms of use</a><span class="ph" title="Placeholder: terms page">*</span></li>
+              <li><a href="https://github.com/SENG455-Vitalitree" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 Vitalitree · A SENG 455 / COM 450 project, University of Victoria</span>
+          <span><span class="ph" style="margin: 0">*</span> = placeholder, content pending</span>
+        </div>
+      </div>
+    </footer>
+
+    <a class="btn btn-primary mobile-cta demo-link" href="#" target="_blank" rel="noopener">
+      Try the live demo
+      <svg aria-hidden="true"><use href="#i-arrow" /></svg>
+    </a>
+
+    <script>
+      // TODO(VDEV-024): set to the hosted release-candidate URL. Every
+      // "Try live demo" button on the page uses this one value.
+      const DEMO_URL = '';
+
+      document.querySelectorAll('.demo-link').forEach((a) => {
+        if (DEMO_URL) a.href = DEMO_URL;
+        else a.addEventListener('click', (e) => e.preventDefault());
+      });
+
+      // Nav border + mobile sticky CTA once the hero scrolls away
+      const nav = document.querySelector('.nav');
+      const mobileCta = document.querySelector('.mobile-cta');
+      const onScroll = () => {
+        nav.classList.toggle('scrolled', window.scrollY > 8);
+        mobileCta.classList.toggle('show', window.scrollY > 640);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Perspective tabs (Mary / Sarah)
+      const tabs = [...document.querySelectorAll('[role="tab"]')];
+      const select = (tab) => {
+        tabs.forEach((t) => {
+          const on = t === tab;
+          t.setAttribute('aria-selected', on);
+          t.tabIndex = on ? 0 : -1;
+          document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+        });
+        const view = tab.id === 'tab-senior' ? 'senior' : 'care';
+        document.querySelectorAll('.phone[data-view]').forEach((p) => (p.hidden = p.dataset.view !== view));
+      };
+      tabs.forEach((t, i) => {
+        t.addEventListener('click', () => select(t));
+        t.addEventListener('keydown', (e) => {
+          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+          const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+          select(next);
+          next.focus();
+        });
+      });
+
+      // Reveal on scroll
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((en) => {
+              if (en.isIntersecting) {
+                en.target.classList.add('in');
+                io.unobserve(en.target);
+              }
+            }),
+          { threshold: 0.12 }
+        );
+        document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+      } else {
+        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
+      }
+    </script>
+  </body>
+</html>
