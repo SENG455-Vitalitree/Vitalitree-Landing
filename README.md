@@ -28,7 +28,6 @@ Hover any `*` on the page to see what it needs.
 | Nav logo, favicon, og:image | Final logo and wordmark (currently a tree mark in a teal tile) | VBIZ-014 |
 | Pricing: Free plan | Confirm that a free tier exists, and its limits | BMC |
 | Pricing: Family plan | Confirm $8 CAD/mo (tested in M2 interviews), member and record limits, annual option, cancellation terms | BMC |
-| Interview quotes | Two approved quotes from the caregiver interviews | Customer discovery |
 | Comparison table note | Confirm the portal comparison claims | VBIZ-014 |
 | FAQ: data storage | Hosting provider, encryption details, "never sell your data" policy | Dev and BCOM |
 | FAQ: integrations, launch | Planned integrations, launch date or waitlist link | Team |
