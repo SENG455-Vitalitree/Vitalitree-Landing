@@ -2,20 +2,22 @@
 
 A single static `index.html` file with no build step and no dependencies. The only external request loads Atkinson Hyperlegible from Google Fonts.
 
+The app itself lives in [Vitalitree-App](https://github.com/SENG455-Vitalitree/Vitalitree-App). This history was moved here from that repo's `landing/` folder ([PR #46](https://github.com/SENG455-Vitalitree/Vitalitree-App/pull/46)).
+
 The design tokens (colours, type, radius, spacing) come from the POC style guide (`Vitalitree-POC/Style Guide.pdf`). The phone mockups are rebuilt in HTML from the POC screens: `family.tsx`, `SeniorAppointmentCard.tsx` and the Visit Questions flow.
 
 ## Preview locally
 
 ```bash
-open landing/index.html
+open index.html
 ```
 
 ## Deploy
 
-Any static host works. Point it at the `landing/` folder:
+Any static host works. The site is the repo root, with no build step.
 
-- **Netlify / Vercel**: create a new site from this repo, set the base/output directory to `landing`, and leave the build command empty.
-- **GitHub Pages**: the org repos are private, so Pages needs a paid plan or a separate public repo that holds just `landing/`.
+- **GitHub Pages**: in repo Settings → Pages, choose "Deploy from a branch", select `main` and `/ (root)`. The site is served at `https://seng455-vitalitree.github.io/Vitalitree-Landing/`.
+- **Netlify / Vercel**: create a new site from this repo and leave the build command and output directory empty.
 
 ## Placeholders to fill (marked with a red `*` on the page)
 
