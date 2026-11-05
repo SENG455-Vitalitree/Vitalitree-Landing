@@ -25,7 +25,8 @@ Hover any `*` on the page to see what it needs.
 
 | Where | What's needed | Owner / ticket |
 | --- | --- | --- |
-| Every "Try live demo" button | Hosted release-candidate URL. Set `DEMO_URL` in the `<script>` at the bottom of `index.html` | VDEV-024 |
+| Every "Try live demo" button | Scrolls to the `#demo` Expo EAS section. Can set `DEMO_URL` or `EXPO_URL` / `EXPO_QR_IMAGE` in `<script>` | VDEV-024 |
+| Live demo QR code section | Expo EAS QR code image + EAS build URL (set `EXPO_QR_IMAGE` / `EXPO_URL` in `<script>`) | VDEV-024 |
 | Demo video section | Fallback demo recording embed | VDEV-024 |
 | Nav logo, favicon, og:image | Final logo and wordmark (currently a tree mark in a teal tile) | VBIZ-014 |
 | Pricing: Free plan | Confirm that a free tier exists, and its limits | BMC |
