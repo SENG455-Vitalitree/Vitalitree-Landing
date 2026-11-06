@@ -23,14 +23,9 @@ Any static host works. The site is the repo root, with no build step.
 - **GitHub Pages**: in repo Settings → Pages, choose "Deploy from a branch", select `main` and `/ (root)`. The site is served at `https://seng455-vitalitree.github.io/Vitalitree-Landing/`.
 - **Netlify / Vercel**: create a new site from this repo and leave the build command and output directory empty.
 
-## Placeholders to fill (marked with a red `*` on the page)
+## Live Demo (VDEV-024)
 
-Hover any `*` on the page to see what it needs.
-
-| Where | What's needed | Owner / ticket |
-| --- | --- | --- |
-| Every "Try live demo" button | Hosted release-candidate URL. Set `DEMO_URL` in the `<script>` at the bottom of `index.html` | VDEV-024 |
-| Demo video section | Fallback demo recording embed | VDEV-024 |
+The live mobile demo is deployed at `https://vitalitree-app.expo.app/` and accessible via the QR code (`WEB_QR.svg`) in `<section id="demo">`.
 
 Once the site has a domain, change `og:image` in the `<head>` to an absolute URL so link previews show the logo.
 
