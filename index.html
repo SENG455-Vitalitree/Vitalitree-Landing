@@ -6,9 +6,10 @@
   GitHub Pages as-is. Design tokens mirror the POC style guide
   (Vitalitree-POC/Style Guide.pdf + tailwind.config.js).
 
-  Anything marked with a red * (class="ph") is a placeholder waiting on
-  real content — mostly from VBIZ-014 (brand assets + value prop copy)
-  and VDEV-024 (live demo URL). See landing/README.md for the full list.
+  Copy, pricing and hosting claims come from the team's Startup Studio doc
+  and M3 Business Model Canvas. Anything still marked with a red *
+  (class="ph") is waiting on VDEV-024 (live demo link + demo video).
+  See README.md for details.
 -->
 <html lang="en">
   <head>
@@ -25,11 +26,10 @@
       property="og:description"
       content="One simple, shared, private health record for families caring for an aging parent."
     />
-    <!-- TODO(VBIZ-014): og:image + favicon once final brand assets exist -->
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230F4C5C'/%3E%3Cpath d='M16 5l-6 8h3l-5 7h4l-4 6h16l-4-6h4l-5-7h3z' fill='%23fff'/%3E%3C/svg%3E"
-    />
+    <!-- Social crawlers need an absolute og:image URL; update once the site has a domain -->
+    <meta property="og:image" content="assets/logo-512.png" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/logo-160.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -288,18 +288,10 @@
         font-size: 22px;
         color: var(--teal);
       }
-      .brand-mark {
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
-        background: var(--teal);
-        display: grid;
-        place-items: center;
+      .brand-logo {
+        width: 44px;
+        height: 44px;
         flex: none;
-      }
-      .brand-mark svg {
-        width: 22px;
-        height: 22px;
       }
       .nav-links {
         display: none;
@@ -1132,25 +1124,6 @@
         padding: 0 22px 22px;
         color: var(--text-soft);
       }
-      .support-card {
-        margin-top: var(--space-4);
-        background: var(--tint);
-        border-radius: var(--radius-lg);
-        padding: var(--space-3);
-      }
-      .support-card h3 {
-        font-size: 20px;
-        margin-bottom: 6px;
-      }
-      .support-card p {
-        color: var(--text-soft);
-        font-size: 17px;
-      }
-      .support-card a {
-        color: var(--teal);
-        font-weight: 700;
-      }
-
       /* ---------- Final CTA ---------- */
       .final {
         padding: 0 0 104px;
@@ -1520,7 +1493,6 @@
   <body>
     <!-- Inline icon sprite (Lucide-style, matches the app's lucide-react-native set) -->
     <svg width="0" height="0" style="position: absolute" aria-hidden="true">
-      <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 2 6 10h3l-5 7h5v5h6v-5h5l-5-7h3z" fill="currentColor" /></symbol>
       <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></symbol>
       <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z" /><circle cx="12" cy="13" r="3" /></symbol>
       <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></symbol>
@@ -1558,10 +1530,8 @@
     <header class="nav" id="top">
       <div class="wrap">
         <a class="brand" href="#top" aria-label="Vitalitree home">
-          <span class="brand-mark" aria-hidden="true"
-            ><svg style="color: #fff"><use href="#i-tree" /></svg
-          ></span>
-          Vitalitree<span class="ph" title="Placeholder: final logo + wordmark from VBIZ-014">*</span>
+          <img class="brand-logo" src="assets/logo-160.png" alt="" width="44" height="44" />
+          Vitalitree
         </a>
         <nav aria-label="Primary">
           <ul class="nav-links">
@@ -1598,7 +1568,7 @@
             </div>
             <ul class="trust-row" aria-label="Highlights">
               <li><svg aria-hidden="true"><use href="#i-check-circle" /></svg>No credit card to try</li>
-              <li><svg aria-hidden="true"><use href="#i-check-circle" /></svg>Canadian-hosted &amp; encrypted</li>
+              <li><svg aria-hidden="true"><use href="#i-check-circle" /></svg>Encrypted &amp; stored in Canada</li>
               <li><svg aria-hidden="true"><use href="#i-check-circle" /></svg>You choose who sees what</li>
             </ul>
           </div>
@@ -1611,22 +1581,22 @@
             </div>
             <div class="float-badge" style="right: -28px; bottom: 56px" aria-hidden="true">
               <span class="ic"><svg><use href="#i-users" /></svg></span>
-              <span>David saw the update<small>Everyone's on the same page</small></span>
+              <span>Mark saw the update<small>Everyone's on the same page</small></span>
             </div>
             <div class="phone" aria-hidden="true">
               <div class="screen">
                 <div class="status"><span>9:41</span><span>●●● ▮</span></div>
                 <div class="app-head">
-                  <div class="s">Good morning, Sarah</div>
+                  <div class="s">Good morning, Carly</div>
                   <div class="t">Your Care Circle</div>
                 </div>
                 <div class="app-body">
                   <div class="m-card focus">
                     <div class="m-row">
-                      <div class="m-avatar">M</div>
+                      <div class="m-avatar">P</div>
                       <div style="flex: 1">
                         <div class="m-row" style="gap: 6px">
-                          <span class="m-name">Mary</span><span class="m-chip">Mom · 76</span>
+                          <span class="m-name">Patricia</span><span class="m-chip">Mom · 76</span>
                         </div>
                         <div class="m-meta">Victoria, BC</div>
                       </div>
@@ -1645,26 +1615,21 @@
                   </div>
 
                   <div class="m-card">
-                    <div class="m-label"><svg><use href="#i-pill" /></svg>Active medication</div>
-                    <div class="m-name" style="margin-top: 4px">Lisinopril 10mg</div>
-                    <div class="m-meta">Linked to tomorrow's visit</div>
+                    <div class="m-label"><svg><use href="#i-file" /></svg>Blood test</div>
+                    <div class="m-name" style="margin-top: 4px">Lipoprotein profile</div>
+                    <div class="m-meta">Ordered by Dr. Chen · Linked to tomorrow's visit</div>
                   </div>
 
-                  <div class="m-sub">Other family members</div>
+                  <div class="m-sub">Also in Mom's care circle</div>
                   <div class="m-card" style="display: grid; gap: 10px">
                     <div class="m-row">
+                      <div class="m-avatar sm">M</div>
+                      <div style="flex: 1"><div class="m-name" style="font-size: 14px">Mark <span class="m-chip">Brother</span></div><div class="m-meta">Sees visits &amp; questions</div></div>
+                      <svg class="m-ico"><use href="#i-chev-right" /></svg>
+                    </div>
+                    <div class="m-row">
                       <div class="m-avatar sm">D</div>
-                      <div style="flex: 1"><div class="m-name" style="font-size: 14px">David <span class="m-chip">Dad</span></div><div class="m-meta">All records current</div></div>
-                      <svg class="m-ico"><use href="#i-chev-right" /></svg>
-                    </div>
-                    <div class="m-row">
-                      <div class="m-avatar sm">L</div>
-                      <div style="flex: 1"><div class="m-name" style="font-size: 14px">Lucas <span class="m-chip">Son</span></div><div class="m-meta">Pediatric checkup complete</div></div>
-                      <svg class="m-ico"><use href="#i-chev-right" /></svg>
-                    </div>
-                    <div class="m-row">
-                      <div class="m-avatar sm">E</div>
-                      <div style="flex: 1"><div class="m-name" style="font-size: 14px">Emma <span class="m-chip">Daughter</span></div><div class="m-meta">Vaccinations up to date</div></div>
+                      <div style="flex: 1"><div class="m-name" style="font-size: 14px">David <span class="m-chip">Dad · 78</span></div><div class="m-meta">Sees medications</div></div>
                       <svg class="m-ico"><use href="#i-chev-right" /></svg>
                     </div>
                   </div>
@@ -1725,8 +1690,8 @@
           <div class="persp-grid">
             <div class="reveal">
               <div class="seg" role="tablist" aria-label="Choose a perspective">
-                <button role="tab" id="tab-senior" aria-controls="panel-senior" aria-selected="true">Mary, 76</button>
-                <button role="tab" id="tab-care" aria-controls="panel-care" aria-selected="false" tabindex="-1">Sarah, 48</button>
+                <button role="tab" id="tab-senior" aria-controls="panel-senior" aria-selected="true">Patricia, 76</button>
+                <button role="tab" id="tab-care" aria-controls="panel-care" aria-selected="false" tabindex="-1">Carly, 48</button>
               </div>
 
               <div class="persp-panel" role="tabpanel" id="panel-senior" aria-labelledby="tab-senior">
@@ -1734,8 +1699,8 @@
                 <p class="who">Large, clear screens designed for older eyes and hands.</p>
                 <ul class="ticks">
                   <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>See what's next at a glance</b><span class="d">Who, when and where, in big, readable type.</span></span></li>
-                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>Walk in prepared</b><span class="d">Questions your family suggested are waiting for you to approve.</span></span></li>
-                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>You decide what's shared</b><span class="d">Keep any question or record private, just for you and your doctor.</span></span></li>
+                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>Walk in prepared</b><span class="d">Your family's questions and your own, in one list ready for the visit.</span></span></li>
+                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>You stay in control</b><span class="d">You choose what each family member can see, and can change it anytime.</span></span></li>
                 </ul>
               </div>
 
@@ -1743,8 +1708,8 @@
                 <h3>Know what's happening without the phone tag.</h3>
                 <p class="who">One place the whole family can check, wherever you live.</p>
                 <ul class="ticks">
-                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>Everyone in one care circle</b><span class="d">Parents and kids side by side, each with their own records.</span></span></li>
-                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>Suggest questions before the visit</b><span class="d">Mom approves them, then the doctor's answers are shared back.</span></span></li>
+                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>Everyone in one care circle</b><span class="d">Mom, Dad and your siblings together, each person's records kept separate.</span></span></li>
+                  <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>Suggest questions before the visit</b><span class="d">See when each one is approved, then read the doctor's answer afterward.</span></span></li>
                   <li><span class="tk"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span><b>Help from a distance</b><span class="d">Long-distance siblings see the same up-to-date information.</span></span></li>
                 </ul>
               </div>
@@ -1758,53 +1723,53 @@
             </div>
 
             <div class="phone-stage reveal">
-              <!-- Senior screen (POC components/demo/SeniorAppointmentCard.tsx) -->
-              <div class="phone" data-view="senior" aria-label="Mary's view: large-text upcoming visit screen">
+              <!-- Senior screen (app components/senior/AppointmentCards + QuestionsForDoctorCard) -->
+              <div class="phone" data-view="senior" aria-label="Patricia's view: large-text upcoming visit and questions for her doctor">
                 <div class="screen senior">
                   <div class="status"><span>9:41</span><span>●●● ▮</span></div>
-                  <div class="app-head"><div class="t">Hello, Mary</div></div>
+                  <div class="app-head"><div class="t">Hello, Patricia</div></div>
                   <div class="app-body">
                     <div class="m-card">
-                      <div class="m-label" style="font-size: 14px"><svg><use href="#i-calendar" /></svg>Upcoming visit</div>
+                      <div class="m-label" style="font-size: 14px"><svg><use href="#i-calendar" /></svg>Upcoming Visit</div>
                       <div class="big" style="margin-top: 6px">Tomorrow</div>
                       <div class="m-line"><svg><use href="#i-steth" /></svg>Dr. Bob Chen, Cardiology</div>
                       <div class="m-line"><svg><use href="#i-clock" /></svg><b>10:30 AM</b></div>
                       <div class="m-line"><svg><use href="#i-pin" /></svg>Victoria Heart Health Clinic</div>
                     </div>
                     <div class="m-card focus" style="overflow: hidden">
-                      <div class="q-head"><svg><use href="#i-question" /></svg>Sarah suggested a question</div>
-                      <div style="font-size: 17px">"Could the afternoon dizziness be from my Lisinopril?"</div>
-                      <div style="display: grid; gap: 8px; margin-top: 12px">
-                        <div class="m-btn" style="font-size: 16px; padding: 12px">Add to Doctor Briefing</div>
-                        <div class="m-btn outline" style="font-size: 16px; padding: 10px">Keep Private</div>
-                      </div>
+                      <div class="q-head"><svg><use href="#i-question" /></svg>Questions for My Doctor</div>
+                      <div class="m-chip tint" style="font-size: 13px">From Carly</div>
+                      <div style="font-size: 17px; margin-top: 4px">Could the afternoon dizziness be from my Metoprolol?</div>
+                      <div style="height: 2px; background: var(--border); margin: 12px 0"></div>
+                      <div class="m-chip" style="font-size: 13px">Your question</div>
+                      <div style="font-size: 17px; margin-top: 4px">Do I still need the morning blood test?</div>
                     </div>
-                    <div class="m-btn"><svg><use href="#i-steth" /></svg>Show Doctor</div>
+                    <div class="m-btn"><svg><use href="#i-plus" /></svg>Add a Question</div>
                   </div>
                 </div>
               </div>
 
               <!-- Caregiver screen -->
-              <div class="phone" data-view="care" aria-label="Sarah's view: suggest a question for Mom's visit" hidden>
+              <div class="phone" data-view="care" aria-label="Carly's view: suggest a question for Mom's visit" hidden>
                 <div class="screen">
                   <div class="status"><span>9:41</span><span>●●● ▮</span></div>
                   <div class="app-head">
-                    <div class="s">Mary · Cardiology · Tomorrow 10:30 AM</div>
+                    <div class="s">Patricia · Cardiology · Tomorrow 10:30 AM</div>
                     <div class="t">Visit Questions</div>
                   </div>
                   <div class="app-body">
                     <div class="m-card">
-                      <div class="m-label"><svg><use href="#i-question" /></svg>Suggest a question</div>
+                      <div class="m-label"><svg><use href="#i-question" /></svg>Visit question</div>
                       <div class="m-card" style="margin-top: 8px; min-height: 64px; color: var(--text-soft)">Ask about her new BP readings…</div>
-                      <div class="m-btn" style="margin-top: 8px">Submit Question</div>
+                      <div class="m-btn" style="margin-top: 8px">Submit question</div>
                     </div>
-                    <div class="m-sub">Sent to Mom</div>
+                    <div class="m-sub">Mom's visit list</div>
                     <div class="m-card">
-                      <div class="m-row" style="justify-content: space-between"><span class="m-name" style="font-size: 14px">Could the dizziness be from Lisinopril?</span></div>
-                      <div class="m-row" style="margin-top: 6px; gap: 6px"><span class="m-chip tint">Approved by Mom</span><span class="m-meta">9:12 AM</span></div>
+                      <div class="m-row" style="justify-content: space-between"><span class="m-name" style="font-size: 14px">Could the dizziness be from Metoprolol?</span></div>
+                      <div class="m-row" style="margin-top: 6px; gap: 6px"><span class="m-chip tint">Approved for Doctor</span><span class="m-meta">9:12 AM</span></div>
                       <div class="m-card" style="margin-top: 8px; background: #eaf4ee; border-color: #cfe5d7">
-                        <div class="m-label" style="color: var(--success)"><svg style="color: var(--success)"><use href="#i-check-circle" /></svg>Dr. Chen answered</div>
-                        <div style="margin-top: 4px">Likely related. Lowering to 5mg; recheck in 2 weeks.</div>
+                        <div class="m-label" style="color: var(--success)"><svg style="color: var(--success)"><use href="#i-check-circle" /></svg>Answered by Dr. Chen</div>
+                        <div style="margin-top: 4px">Possibly. Keep a blood pressure log for two weeks, then follow up.</div>
                       </div>
                     </div>
                     <div class="m-card">
@@ -1855,7 +1820,7 @@
               <div>
                 <span class="gain"><svg aria-hidden="true"><use href="#i-check" /></svg>Peace of mind</span>
                 <h3>Walk into every visit prepared</h3>
-                <p>Collect the family's questions beforehand, hand the doctor a clear briefing, and share what they said afterward.</p>
+                <p>Collect the family's questions beforehand, bring one clear list to the visit, and share what the doctor said afterward.</p>
               </div>
             </article>
             <article class="benefit reveal">
@@ -1893,7 +1858,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">Whole family in one place<small>Parents, kids and partners in one care circle</small></th>
+                  <th scope="row">Whole family in one place<small>Parents, siblings and partners in one care circle</small></th>
                   <td class="us" data-col="Vitalitree"><span class="yes"><svg aria-hidden="true"><use href="#i-check-circle" /></svg>Built in</span></td>
                   <td data-col="Portals"><span class="part"><svg aria-hidden="true"><use href="#i-minus-circle" /></svg>Limited proxy access, if offered</span></td>
                 </tr>
@@ -1904,13 +1869,13 @@
                 </tr>
                 <tr>
                   <th scope="row">Visit prep with family questions</th>
-                  <td class="us" data-col="Vitalitree"><span class="yes"><svg aria-hidden="true"><use href="#i-check-circle" /></svg>Doctor briefing + shared answers</span></td>
+                  <td class="us" data-col="Vitalitree"><span class="yes"><svg aria-hidden="true"><use href="#i-check-circle" /></svg>One shared question list + answers</span></td>
                   <td data-col="Portals"><span class="no"><svg aria-hidden="true"><use href="#i-x-circle" /></svg>Not available</span></td>
                 </tr>
                 <tr>
                   <th scope="row">Per-person sharing controls</th>
                   <td class="us" data-col="Vitalitree"><span class="yes"><svg aria-hidden="true"><use href="#i-check-circle" /></svg>Each person approves what's shared</span></td>
-                  <td data-col="Portals"><span class="part"><svg aria-hidden="true"><use href="#i-minus-circle" /></svg>All-or-nothing proxy</span></td>
+                  <td data-col="Portals"><span class="part"><svg aria-hidden="true"><use href="#i-minus-circle" /></svg>Proxy access only if the clinic allows it</span></td>
                 </tr>
                 <tr>
                   <th scope="row">Designed for older adults<small>Large text, big buttons, fewer screens</small></th>
@@ -1926,8 +1891,8 @@
             </table>
           </div>
           <p class="compare-note">
-            Based on our team's review of MyChart, BC Health Gateway and similar portals (Oct 2026).
-            Features vary by provider.<span class="ph" title="Placeholder: confirm comparison claims with BCOM team / VBIZ-014">*</span>
+            Based on our team's competitor research on MyChart, BC Health Gateway and Apple Health
+            (Oct 2026). Features vary by provider.
           </p>
         </div>
       </section>
@@ -2018,25 +1983,25 @@
           </div>
           <div class="plans">
             <article class="plan reveal">
-              <h3>Free<span class="ph" title="Placeholder: confirm free tier exists + its limits (BMC)">*</span></h3>
+              <h3>Free</h3>
               <div class="price"><span class="amt">$0</span><span class="per">CAD</span></div>
-              <p style="color: var(--text-soft)">Get organized on your own.</p>
+              <p style="color: var(--text-soft)">Try uploading documents and set up your care circle.</p>
               <ul>
-                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>1 person<span class="ph" title="Placeholder: free tier limits">*</span></span></li>
-                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Photo record capture<span class="ph" title="Placeholder: free tier limits (e.g. # of records)">*</span></span></li>
-                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Encrypted, Canadian-hosted storage</span></li>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>One profile</span></li>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>A small care circle</span></li>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Limited encrypted storage in Canada</span></li>
               </ul>
               <a class="btn btn-secondary demo-link" href="#demo">Start free</a>
             </article>
             <article class="plan featured reveal">
               <span class="tag">Recommended for families</span>
               <h3>Family</h3>
-              <div class="price"><span class="amt">$8</span><span class="per">CAD / month<span class="ph" title="Placeholder: $8 CAD/mo tested in M2 interviews; confirm final price + annual option in BMC">*</span></span></div>
-              <p style="color: var(--text-soft)">Everything your care circle needs.</p>
+              <div class="price"><span class="amt">$8</span><span class="per">CAD / month</span></div>
+              <p style="color: var(--text-soft)">Or $80 CAD / year. Everything your care circle needs.</p>
               <ul>
-                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Your whole family care circle<span class="ph" title="Placeholder: member limit, if any">*</span></span></li>
-                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Unlimited photo records<span class="ph" title="Placeholder: confirm limits">*</span></span></li>
-                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Visit prep, doctor briefings &amp; shared answers</span></li>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Unlimited care circle members</span></li>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Photo-based record capture</span></li>
+                <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Shared visit prep &amp; the doctor's answers</span></li>
                 <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Per-person sharing controls</span></li>
                 <li><svg aria-hidden="true"><use href="#i-check" /></svg><span>Reminders &amp; calendar sync <span class="planned">Coming soon</span></span></li>
               </ul>
@@ -2044,8 +2009,7 @@
             </article>
           </div>
           <p class="price-note">
-            Cancel anytime<span class="ph" title="Placeholder: confirm cancellation / trial terms">*</span>
-            · Prices in Canadian dollars
+            Prices in Canadian dollars. Security and encryption are included on every plan.
           </p>
         </div>
       </section>
@@ -2056,20 +2020,14 @@
           <div class="reveal">
             <span class="eyebrow">FAQ</span>
             <h2 style="font-size: clamp(30px, 4.2vw, 44px)">Questions families ask us</h2>
-            <div class="support-card">
-              <h3>Still have a question?</h3>
-              <p>
-                We're happy to help. Email us at
-                <a href="#">hello@vitalitree.ca</a><span class="ph" title="Placeholder: real support email / contact form">*</span>
-              </p>
-            </div>
           </div>
           <div class="faq reveal">
             <details>
               <summary>Where is my family's data stored?<svg aria-hidden="true"><use href="#i-chev-down" /></svg></summary>
               <div class="a">
-                Your records are encrypted and stored on servers in Canada.<span class="ph" title="Placeholder: name hosting provider + encryption details, privacy policy link">*</span>
-                We never sell your data.<span class="ph" title="Placeholder: confirm with privacy policy">*</span>
+                In Canada. Records are encrypted on your device before they're uploaded, so our servers only
+                ever hold encrypted data, and only the devices you authorize can read it. It's stored in a
+                Canadian data region on infrastructure certified to SOC 2 Type 2. We never sell your data.
               </div>
             </details>
             <details>
@@ -2089,23 +2047,22 @@
             <details>
               <summary>Does it connect to MyChart or BC Health Gateway?<svg aria-hidden="true"><use href="#i-chev-down" /></svg></summary>
               <div class="a">
-                Not directly today. Instead, you can add a record from any source by snapping a photo or
-                uploading a PDF, which works with every clinic and province.
-                <span class="ph" title="Placeholder: any planned integrations?">*</span>
+                Not yet. For now, you can add a record from any source by snapping a photo or uploading a
+                PDF, which works with every clinic and province. Connecting to provincial portals is on our
+                roadmap.
               </div>
             </details>
             <details>
               <summary>How much does it cost?<svg aria-hidden="true"><use href="#i-chev-down" /></svg></summary>
               <div class="a">
-                The Family plan is $8 CAD per month for your whole care circle.<span class="ph" title="Placeholder: confirm final pricing">*</span>
-                You can try the live demo for free without an account or credit card.
+                There's a free plan to get started. The Family plan is $8 CAD per month, or $80 per year,
+                for your whole care circle. You can try the live demo without an account or credit card.
               </div>
             </details>
             <details>
               <summary>Can I use it today?<svg aria-hidden="true"><use href="#i-chev-down" /></svg></summary>
               <div class="a">
-                Vitalitree is in early release. You can try the full experience in our live demo now, and
-                join the waitlist for launch.<span class="ph" title="Placeholder: launch date / waitlist link">*</span>
+                Vitalitree is in early release. You can try the full experience in our live demo now.
               </div>
             </details>
           </div>
@@ -2135,7 +2092,7 @@
         <div class="foot-grid">
           <div>
             <a class="brand" href="#top" style="margin-bottom: 12px">
-              <span class="brand-mark" aria-hidden="true"><svg style="color: #fff"><use href="#i-tree" /></svg></span>
+              <img class="brand-logo" src="assets/logo-160.png" alt="" width="44" height="44" />
               Vitalitree
             </a>
             <p>One simple, shared, private place for your family's health records. Proudly built in Victoria, BC.</p>
@@ -2153,9 +2110,7 @@
           <div>
             <h4>Company</h4>
             <ul>
-              <li><a href="#faq">FAQ &amp; support</a></li>
-              <li><a href="#">Privacy policy</a><span class="ph" title="Placeholder: privacy policy page">*</span></li>
-              <li><a href="#">Terms of use</a><span class="ph" title="Placeholder: terms page">*</span></li>
+              <li><a href="#faq">FAQ</a></li>
               <li><a href="https://github.com/SENG455-Vitalitree" target="_blank" rel="noopener">GitHub</a></li>
             </ul>
           </div>
@@ -2195,7 +2150,7 @@
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
 
-      // Perspective tabs (Mary / Sarah)
+      // Perspective tabs (Patricia / Carly)
       const tabs = [...document.querySelectorAll('[role="tab"]')];
       const select = (tab) => {
         tabs.forEach((t) => {
