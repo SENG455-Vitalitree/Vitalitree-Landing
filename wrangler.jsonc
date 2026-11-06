@@ -1,0 +1,11 @@
+// Cloudflare Workers config: serves this repo as a static site (no build step).
+// Files listed in .assetsignore are not uploaded.
+{
+  "name": "vitalitree",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "."
+  },
+  // Required by `npx wrangler preview`, which Cloudflare runs for PR preview builds.
+  "previews": {}
+}

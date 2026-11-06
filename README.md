@@ -4,7 +4,11 @@ A single static `index.html` file with no build step and no dependencies. The on
 
 The app itself lives in [Vitalitree-App](https://github.com/SENG455-Vitalitree/Vitalitree-App). This history was moved here from that repo's `landing/` folder ([PR #46](https://github.com/SENG455-Vitalitree/Vitalitree-App/pull/46)).
 
-The design tokens (colours, type, radius, spacing) come from the POC style guide (`Vitalitree-POC/Style Guide.pdf`). The phone mockups are rebuilt in HTML from the POC screens: `family.tsx`, `SeniorAppointmentCard.tsx` and the Visit Questions flow.
+The design tokens (colours, type, radius, spacing) come from the POC style guide (`Vitalitree-POC/Style Guide.pdf`). The phone mockups are rebuilt in HTML to match the app's current screens and demo personas (Patient Patricia and Caring Carly).
+
+Pricing, hosting and privacy claims come from the team's Startup Studio doc and the M3 Business Model Canvas. Update the page if those change.
+
+The logo lives in `assets/`: `logo-160.png` (nav and footer), `logo-512.png` (social preview) and `favicon.png`.
 
 ## Preview locally
 
@@ -27,10 +31,13 @@ Hover any `*` on the page to see what it needs.
 | --- | --- | --- |
 | Every "Try live demo" button | Hosted release-candidate URL. Set `DEMO_URL` in the `<script>` at the bottom of `index.html` | VDEV-024 |
 | Demo video section | Fallback demo recording embed | VDEV-024 |
-| Nav logo, favicon, og:image | Final logo and wordmark (currently a tree mark in a teal tile) | VBIZ-014 |
-| Pricing: Free plan | Confirm that a free tier exists, and its limits | BMC |
-| Pricing: Family plan | Confirm $8 CAD/mo (tested in M2 interviews), member and record limits, annual option, cancellation terms | BMC |
-| Comparison table note | Confirm the portal comparison claims | VBIZ-014 |
-| FAQ: data storage | Hosting provider, encryption details, "never sell your data" policy | Dev and BCOM |
-| FAQ: integrations, launch | Planned integrations, launch date or waitlist link | Team |
-| Support email, Privacy, Terms | Real contact address and policy pages | Team |
+
+Once the site has a domain, change `og:image` in the `<head>` to an absolute URL so link previews show the logo.
+
+## Left off on purpose
+
+These were removed because the team doesn't have them yet. Add them back when they exist:
+
+- A support email or contact form (the FAQ section had a contact card)
+- Privacy policy and Terms of use pages (footer links)
+- Free plan limits in numbers (the page uses the BMC wording: one profile, a small care circle, limited storage)
